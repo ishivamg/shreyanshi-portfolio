@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { SmoothScroll } from '@/components/SmoothScroll';
-import { Cursor } from '@/components/ui/Cursor';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://shreyanshi.design'),
@@ -49,18 +48,30 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" data-theme="dark">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Prevent flash of wrong theme */}
+        <script dangerouslySetInnerHTML={{ __html: `try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}` }} />
+        {/* Preconnect to the Framer CDN that hosts Open Sauce fonts */}
+        <link rel="preconnect" href="https://framerusercontent.com" crossOrigin="anonymous" />
+        {/* Preload the two most critical font weights (display heading + body medium) */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"
-          rel="stylesheet"
+          rel="preload"
+          as="font"
+          type="font/woff2"
+          href="https://framerusercontent.com/assets/MuNMZGWeNhX5Gys174fgd0zrnbE.woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          as="font"
+          type="font/woff2"
+          href="https://framerusercontent.com/assets/O2R7AhA6wjBk0GHLJl0N8fqxN0.woff2"
+          crossOrigin="anonymous"
         />
       </head>
       <body className="relative min-h-screen overflow-x-hidden">
         <SmoothScroll />
-        <Cursor />
         {children}
       </body>
     </html>
