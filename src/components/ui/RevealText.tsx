@@ -1,12 +1,13 @@
 'use client';
 
+import React, { createElement, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { createElement, useRef } from 'react';
 import { cn } from '@/lib/utils';
 
 type Props = {
   text: string;
   className?: string;
+  style?: React.CSSProperties;
   as?: 'h1' | 'h2' | 'h3' | 'p';
   delay?: number;
   stagger?: number;
@@ -21,6 +22,7 @@ type Props = {
 export function RevealText({
   text,
   className,
+  style,
   as = 'h2',
   delay = 0,
   stagger = 0.06,
@@ -33,7 +35,7 @@ export function RevealText({
 
   return createElement(
     as,
-    { ref, className: cn('flex flex-wrap', className) },
+    { ref, className: cn('flex flex-wrap', className), style },
     words.map((word, i) => (
       <span
         key={`${word}-${i}`}

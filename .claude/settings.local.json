@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "Bash(find /Users/appinventiv/Documents/GitHub/shreyanshi-portfolio -name \"about_page.html\" 2>/dev/null; find ~ -name \"about_page.html\" -not -path \"*/node_modules/*\" 2>/dev/null | head -5)",
+      "Read(//Users/appinventiv/**)",
+      "Bash(python3)",
+      "Bash(python3 -c ' *)",
+      "Bash(npm install *)",
+      "Bash(npm list *)",
+      "Bash(node -e \"const si = require\\('react-icons/si'\\); const keys = Object.keys\\(si\\).filter\\(k => /figma|framer|photoshop|adobexd/i.test\\(k\\)\\); console.log\\(keys\\);\")",
+      "Bash(node -e \"const si = require\\('react-icons/si'\\); const keys = Object.keys\\(si\\).filter\\(k => /adobe/i.test\\(k\\)\\); console.log\\(keys\\);\")",
+      "Bash(node -e \"const si = require\\('react-icons/si'\\); const keys = Object.keys\\(si\\).filter\\(k => /photoshop|xd/i.test\\(k\\)\\); console.log\\(keys\\);\")",
+      "Bash(node -e \"const fa = require\\('react-icons/fa6'\\); const keys = Object.keys\\(fa\\).filter\\(k => /figma|framer|photoshop|adobe/i.test\\(k\\)\\); console.log\\(keys\\);\")",
+      "Bash(node -e \"const bi = require\\('react-icons/bi'\\); const keys = Object.keys\\(bi\\).filter\\(k => /figma|framer|photo|adobe/i.test\\(k\\)\\); console.log\\(keys\\);\")",
+      "Bash(node -e \"const tb = require\\('react-icons/tb'\\); const keys = Object.keys\\(tb\\).filter\\(k => /figma|framer|photo|adobe/i.test\\(k\\)\\); console.log\\(keys\\);\")",
+      "Bash(mkdir -p /Users/appinventiv/Documents/GitHub/shreyanshi-portfolio/src/app/portfolio/\\\\[slug\\\\])"
+    ],
+    "additionalDirectories": [
+      "/Users/appinventiv/Documents/GitHub/shreyanshi-portfolio/src/app/portfolio"
+    ]
+  }
+}

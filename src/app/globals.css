@@ -1,13 +1,56 @@
+/* ─── Open Sauce Two — headings / display ─────────────────────────────────── */
+@font-face {
+  font-family: "Open Sauce Two";
+  src: url("https://framerusercontent.com/assets/MuNMZGWeNhX5Gys174fgd0zrnbE.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+/* ─── Open Sauce Sans — body / UI text ────────────────────────────────────── */
+@font-face {
+  font-family: "Open Sauce Sans";
+  src: url("https://framerusercontent.com/assets/VvQsG6v03iEur3JMvHc8uDrkGo.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Open Sauce Sans";
+  src: url("https://framerusercontent.com/assets/O2R7AhA6wjBk0GHLJl0N8fqxN0.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Open Sauce Sans";
+  src: url("https://framerusercontent.com/assets/FU5SehNS0gqCfI1z9VMQFQ9kps.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ── Light mode — invert the entire body for a clean monochrome flip ── */
+html[data-theme="light"] body {
+  filter: invert(1);
+  /* Re-invert images/videos so they look natural */
+}
+html[data-theme="light"] img,
+html[data-theme="light"] video {
+  filter: invert(1);
+}
+
 @layer base {
   :root {
-    --font-sans: 'Geist', 'Inter', system-ui, sans-serif;
-    --font-display: 'Instrument Serif', 'Times New Roman', serif;
-    --font-serif: 'Instrument Serif', 'Times New Roman', serif;
-    --font-mono: 'Geist Mono', ui-monospace, monospace;
+    /* Open Sauce Sans = body/UI, Open Sauce Two = headings/display */
+    --font-sans: 'Open Sauce Sans', system-ui, sans-serif;
+    --font-display: 'Open Sauce Two', system-ui, sans-serif;
+    --font-serif: 'Open Sauce Two', system-ui, sans-serif;
+    --font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', monospace;
     color-scheme: dark;
   }
 
@@ -81,9 +124,16 @@
     -webkit-backdrop-filter: blur(18px) saturate(140%);
   }
 
+  /* Exact Framer/Vexoo card spec:
+     – border-radius: 32px
+     – backdrop-filter: blur(10px)
+     – inset top glow: 1px 0px 0px 1px rgba(255,255,255,0.06)  (no separate border)
+     – background: near-transparent dark for frosted-glass look  */
   .bento-card {
-    @apply relative overflow-hidden rounded-[28px] border border-white/[0.06] bg-white/[0.025];
-    box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.06);
+    @apply relative overflow-hidden rounded-[32px] bg-noir-900/70;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: inset 0px 1px 0px 1px rgba(255, 255, 255, 0.06);
   }
 
   .bento-card::after {
@@ -93,7 +143,7 @@
     border-radius: inherit;
     pointer-events: none;
     background:
-      radial-gradient(120% 80% at 0% 0%, rgba(255, 255, 255, 0.04), transparent 60%);
+      radial-gradient(120% 80% at 0% 0%, rgba(255, 255, 255, 0.03), transparent 60%);
   }
 }
 
@@ -105,7 +155,5 @@
     mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
     -webkit-mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
   }
-  .skew-y-12 {
-    transform: skewY(12deg);
-  }
+
 }

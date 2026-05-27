@@ -1,13 +1,11 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import { Download, Mail, Phone, ArrowUpRight } from 'lucide-react';
-import { PageShell } from '@/components/PageShell';
+import { Navbar } from '@/components/Navbar';
+import { Footer } from '@/components/Footer';
 import { experience, contact } from '@/lib/data';
 
 export const metadata: Metadata = {
   title: 'Resume',
-  description:
-    'Resume — Shreyanshi Bhatnagar, Senior Product Designer. AI · SaaS · Fintech · Web3.'
+  description: 'Resume — Shreyanshi Bhatnagar, Senior Product Designer.'
 };
 
 const summary = [
@@ -19,158 +17,220 @@ const summary = [
   'Brand & marketing design across IG, FB, LinkedIn, email'
 ];
 
-const tools = [
-  'Figma',
-  'FigJam',
-  'Adobe XD',
-  'Photoshop',
-  'Illustrator',
-  'After Effects',
-  'Framer',
-  'Mixpanel',
-  'Metabase',
-  'Retool',
-  'Intercom',
-  'Customer.io',
-  'JIRA',
-  'Loom',
-  'Claude',
-  'Midjourney',
-  'Galileo AI',
-  'Runway ML'
+const toolsList = [
+  'Figma', 'FigJam', 'Adobe XD', 'Photoshop', 'Illustrator',
+  'After Effects', 'Framer', 'Mixpanel', 'Metabase', 'Retool',
+  'Intercom', 'Customer.io', 'JIRA', 'Loom', 'Claude', 'Midjourney',
+  'Galileo AI', 'Runway ML'
 ];
 
 export default function ResumePage() {
   return (
-    <PageShell
-      eyebrow="05 — Resume"
-      title="Resume"
-      intro="A snapshot. Five years across AI, SaaS, Web3 and brand systems — research through design QA, under one hand."
-      prev={{ href: '/contact', label: 'Contact' }}
+    <main
+      style={{
+        backgroundColor: '#000000',
+        minHeight: '100vh',
+        position: 'relative',
+        overflowX: 'hidden'
+      }}
     >
-      <div className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-14">
-        <aside className="md:col-span-4">
-          <div className="sticky top-32 space-y-6">
-            <a
-              href="/Shreyanshi-Bhatnagar-Resume.pdf"
-              download
-              className="group inline-flex w-full items-center justify-between gap-3 rounded-full bg-lime-400 px-6 py-4 text-[14px] font-medium text-noir-950 transition-colors hover:bg-lime-300"
-            >
-              <span>Download PDF</span>
-              <Download className="h-4 w-4 transition-transform duration-500 ease-expo group-hover:translate-y-0.5" />
-            </a>
+      {/* Noise overlay */}
+      <div
+        aria-hidden
+        style={{
+          position: 'fixed', inset: 0,
+          backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+          backgroundSize: '64px', backgroundRepeat: 'repeat',
+          opacity: 0.04, pointerEvents: 'none', zIndex: 0
+        }}
+      />
 
-            <ul className="space-y-3 rounded-2xl border border-white/[0.06] bg-white/[0.025] p-5">
-              <Row icon={<Mail className="h-4 w-4" />} label="Email" value={contact.email} />
-              <Row icon={<Phone className="h-4 w-4" />} label="Phone" value={contact.phone} />
-              <Row label="Location" value={contact.location} />
-              <Row label="Status" value={contact.available} accent />
-            </ul>
+      <Navbar />
 
-            <Link
-              href="/contact"
-              className="group inline-flex w-full items-center justify-between gap-3 rounded-2xl border border-white/[0.06] bg-white/[0.025] px-5 py-4 text-[14px] text-chalk-100 transition-colors hover:bg-white/[0.05]"
-            >
-              <span>Start a project</span>
-              <ArrowUpRight className="h-4 w-4 transition-transform duration-500 ease-expo group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </Link>
+      <div
+        style={{
+          position: 'relative', zIndex: 1, width: '100%',
+          display: 'flex', flexDirection: 'column',
+          gap: 'clamp(48px, 5.56vw, 80px)',
+          paddingTop: 'clamp(80px, 8.61vw, 124px)',
+          paddingBottom: '80px',
+          paddingLeft: '40px', paddingRight: '40px'
+        }}
+        className="resume-main"
+      >
+        {/* Heading */}
+        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', gap: '24px', flexWrap: 'wrap' }}>
+          <h2
+            style={{
+              fontFamily: '"Open Sauce Sans", system-ui, sans-serif',
+              fontSize: 'clamp(1.625rem, 3.33vw, 3rem)',
+              fontWeight: 500, letterSpacing: '-0.02em',
+              lineHeight: '1.2em', color: '#ffffff', margin: 0, maxWidth: '60%'
+            }}
+            className="resume-heading"
+          >
+            Five years shipping design across AI, SaaS, Web3 and brand
+          </h2>
+          {/* Download button */}
+          <a
+            href="/Shreyanshi-Bhatnagar-Resume.pdf"
+            download
+            className="resume-dl-btn"
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: '10px',
+              height: '48px', padding: '0 24px', borderRadius: '12px',
+              backgroundColor: '#ffffff', color: '#000000', textDecoration: 'none',
+              fontFamily: '"Open Sauce Sans", system-ui, sans-serif',
+              fontSize: '15px', fontWeight: 500, letterSpacing: '-0.01em',
+              flexShrink: 0, transition: 'opacity 0.2s'
+            }}
+          >
+            Download PDF
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
+              <path d="M7 1v8M3 9l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </a>
+        </div>
+
+        {/* Content */}
+        <div
+          style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', gap: '64px' }}
+          className="resume-content"
+        >
+          {/* Left sidebar */}
+          <div style={{ width: '240px', flexShrink: 0, display: 'flex', flexDirection: 'column', gap: '32px' }} className="resume-sidebar">
+            <ContactBlock label="Email"    value={contact.email}    href={`mailto:${contact.email}`} />
+            <ContactBlock label="Phone"    value={contact.phone}    href={`tel:${contact.phone.replace(/\s/g, '')}`} />
+            <ContactBlock label="Location" value={contact.location} />
+            <ContactBlock label="Status"   value={contact.available} />
           </div>
-        </aside>
 
-        <article className="space-y-16 md:col-span-8 md:space-y-20">
-          <Block title="Summary">
-            <p className="text-[15px] leading-relaxed text-chalk-300">
-              Senior Product Designer with 5+ years delivering end-to-end product design across
-              fintech, AI platforms, Web3, SaaS and gaming. Built Figma design systems from zero to
-              production at three companies, reducing iteration cycles by up to 40% and enabling
-              async developer handoff across distributed teams. Currently building Vasi — an AI
-              chatbot — solo from scratch.
-            </p>
-          </Block>
+          {/* Main content */}
+          <div style={{ flex: '1 0 0', minWidth: 0, display: 'flex', flexDirection: 'column', gap: '56px' }}>
 
-          <Block title="Core competencies">
-            <ul className="grid grid-cols-1 gap-3 text-[14px] text-chalk-200 sm:grid-cols-2">
-              {summary.map((s) => (
-                <li key={s} className="flex gap-3">
-                  <span className="mt-2 h-px w-3 flex-none bg-lime-400" />
-                  <span>{s}</span>
-                </li>
-              ))}
-            </ul>
-          </Block>
+            {/* Summary */}
+            <ResumeBlock title="Summary">
+              <p style={{ fontFamily: '"Open Sauce Sans", system-ui, sans-serif', fontSize: '16px', fontWeight: 400, lineHeight: '1.6em', color: 'rgba(255,255,255,0.7)', margin: 0 }}>
+                Senior Product Designer with 5+ years delivering end-to-end product design across
+                AI, SaaS, Web3 and brand systems. Built Figma design systems from zero to production
+                at three companies, reducing iteration cycles by up to 40% and enabling async
+                developer handoff across distributed teams.
+              </p>
+            </ResumeBlock>
 
-          <Block title="Experience">
-            <ol className="space-y-8">
-              {experience.map((e, i) => (
-                <li key={e.company} className="border-t border-white/[0.06] pt-6">
-                  <div className="flex flex-wrap items-baseline justify-between gap-2">
-                    <p className="font-display text-2xl text-chalk-50 md:text-3xl">{e.company}</p>
-                    <p className="font-mono text-xs text-chalk-300">{e.period}</p>
+            {/* Core competencies */}
+            <ResumeBlock title="Core competencies">
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }} className="resume-skills-grid">
+                {summary.map(s => (
+                  <div key={s} style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                    <span style={{ width: '16px', height: '1px', backgroundColor: 'rgba(255,255,255,0.3)', flexShrink: 0, marginTop: '11px' }} />
+                    <span style={{ fontFamily: '"Open Sauce Sans", system-ui, sans-serif', fontSize: '14px', fontWeight: 400, lineHeight: '1.5em', color: 'rgba(255,255,255,0.7)' }}>{s}</span>
                   </div>
-                  <p className="mt-1 text-[13px] text-chalk-400">{e.role}</p>
-                  <p className="mt-4 max-w-3xl text-[14px] leading-relaxed text-chalk-300">
-                    {e.note}
-                  </p>
-                </li>
-              ))}
-            </ol>
-          </Block>
+                ))}
+              </div>
+            </ResumeBlock>
 
-          <Block title="Tools">
-            <div className="flex flex-wrap gap-2">
-              {tools.map((t) => (
-                <span
-                  key={t}
-                  className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[13px] text-chalk-200"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-          </Block>
+            {/* Experience */}
+            <ResumeBlock title="Experience">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0px' }}>
+                {experience.map((e, i) => (
+                  <div
+                    key={e.company}
+                    style={{
+                      paddingTop: '28px', paddingBottom: '28px',
+                      borderTop: '1px solid rgba(255,255,255,0.08)'
+                    }}
+                  >
+                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'baseline', justifyContent: 'space-between', gap: '16px', flexWrap: 'wrap', marginBottom: '4px' }}>
+                      <span style={{ fontFamily: '"Open Sauce Sans", system-ui, sans-serif', fontSize: 'clamp(1rem, 1.53vw, 22px)', fontWeight: 500, letterSpacing: '-0.02em', color: '#ffffff' }}>{e.company}</span>
+                      <span style={{ fontFamily: '"Open Sauce Sans", system-ui, sans-serif', fontSize: '13px', fontWeight: 400, color: 'rgba(255,255,255,0.4)', whiteSpace: 'nowrap' }}>{e.period}</span>
+                    </div>
+                    <p style={{ fontFamily: '"Open Sauce Sans", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, color: 'rgba(255,255,255,0.5)', marginBottom: '12px' }}>{e.role}</p>
+                    <p style={{ fontFamily: '"Open Sauce Sans", system-ui, sans-serif', fontSize: '14px', fontWeight: 400, lineHeight: '1.6em', color: 'rgba(255,255,255,0.6)', margin: 0 }}>{e.note}</p>
+                  </div>
+                ))}
+              </div>
+            </ResumeBlock>
 
-          <Block title="Education">
-            <p className="font-display text-xl text-chalk-100">
-              Bachelor of Fine Arts (BFA) — Design (Applied Art)
-            </p>
-            <p className="mt-2 max-w-xl text-[14px] leading-relaxed text-chalk-300">
-              Specialisation in visual design, typography, layout, and applied art — the creative
-              foundation behind every pixel-perfect interface.
-            </p>
-          </Block>
-        </article>
+            {/* Tools */}
+            <ResumeBlock title="Tools">
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                {toolsList.map(t => (
+                  <span
+                    key={t}
+                    className="resume-tool"
+                    style={{
+                      fontFamily: '"Open Sauce Sans", system-ui, sans-serif',
+                      fontSize: '13px', fontWeight: 500, letterSpacing: '-0.01em',
+                      color: 'rgba(255,255,255,0.65)',
+                      border: '1px solid rgba(255,255,255,0.1)',
+                      borderRadius: '100px', padding: '5px 14px',
+                      display: 'inline-block', transition: 'border-color 0.2s, color 0.2s'
+                    }}
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </ResumeBlock>
+
+            {/* Education */}
+            <ResumeBlock title="Education">
+              <p style={{ fontFamily: '"Open Sauce Sans", system-ui, sans-serif', fontSize: 'clamp(1rem, 1.53vw, 22px)', fontWeight: 500, letterSpacing: '-0.02em', color: '#ffffff', margin: '0 0 8px' }}>
+                Bachelor of Fine Arts (BFA) — Design (Applied Art)
+              </p>
+              <p style={{ fontFamily: '"Open Sauce Sans", system-ui, sans-serif', fontSize: '14px', fontWeight: 400, lineHeight: '1.6em', color: 'rgba(255,255,255,0.6)', margin: 0 }}>
+                Specialisation in visual design, typography, layout, and applied art — the creative
+                foundation behind every pixel-perfect interface.
+              </p>
+            </ResumeBlock>
+          </div>
+        </div>
       </div>
-    </PageShell>
+
+      <Footer />
+
+      <style>{`
+        .resume-dl-btn:hover      { opacity: 0.85; }
+        .resume-contact-link:hover { opacity: 0.6; }
+        .resume-tool:hover        { border-color: rgba(255,255,255,0.3) !important; color: #ffffff !important; }
+        @media (max-width: 699.98px) {
+          .resume-main    { padding-left: 16px !important; padding-right: 16px !important; }
+          .resume-heading { max-width: 100% !important; }
+          .resume-content { flex-direction: column !important; gap: 40px !important; }
+          .resume-sidebar { width: 100% !important; flex-direction: row !important; flex-wrap: wrap !important; gap: 24px !important; }
+          .resume-skills-grid { grid-template-columns: 1fr !important; }
+        }
+        @media (min-width: 700px) and (max-width: 1024.98px) {
+          .resume-main    { padding-left: 24px !important; padding-right: 24px !important; }
+          .resume-heading { max-width: 80% !important; }
+          .resume-sidebar { width: 180px !important; }
+        }
+      `}</style>
+    </main>
   );
 }
 
-function Block({ title, children }: { title: string; children: React.ReactNode }) {
+function ResumeBlock({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section>
-      <p className="mb-6 text-[11px] uppercase tracking-[0.3em] text-chalk-400">{title}</p>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+      <span style={{ fontFamily: '"Open Sauce Sans", system-ui, sans-serif', fontSize: '14px', fontWeight: 500, letterSpacing: '-0.01em', color: 'rgba(255,255,255,0.5)' }}>{title}</span>
       {children}
-    </section>
+    </div>
   );
 }
 
-function Row({
-  icon,
-  label,
-  value,
-  accent
-}: {
-  icon?: React.ReactNode;
-  label: string;
-  value: string;
-  accent?: boolean;
-}) {
+function ContactBlock({ label, value, href }: { label: string; value: string; href?: string }) {
   return (
-    <li className="flex items-center justify-between gap-3 border-b border-white/[0.04] pb-3 last:border-b-0 last:pb-0">
-      <span className="inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.22em] text-chalk-400">
-        {icon}
-        {label}
-      </span>
-      <span className={`text-[13px] ${accent ? 'text-lime-300' : 'text-chalk-100'}`}>{value}</span>
-    </li>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+      <span style={{ fontFamily: '"Open Sauce Sans", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, color: 'rgba(255,255,255,0.4)', display: 'block' }}>{label}</span>
+      {href ? (
+        <a href={href} className="resume-contact-link" style={{ fontFamily: '"Open Sauce Sans", system-ui, sans-serif', fontSize: '15px', fontWeight: 500, letterSpacing: '-0.01em', color: '#ffffff', textDecoration: 'none', transition: 'opacity 0.2s' }}>
+          {value}
+        </a>
+      ) : (
+        <span style={{ fontFamily: '"Open Sauce Sans", system-ui, sans-serif', fontSize: '15px', fontWeight: 500, letterSpacing: '-0.01em', color: '#ffffff' }}>{value}</span>
+      )}
+    </div>
   );
 }

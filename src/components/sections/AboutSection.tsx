@@ -1,131 +1,232 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
-import { Sparkles, Layers, Compass, Wand2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
-const pillars = [
-  { icon: Compass, label: 'Research & Strategy' },
-  { icon: Layers, label: 'Design Systems' },
-  { icon: Wand2, label: 'Motion & Interaction' },
-  { icon: Sparkles, label: 'AI Product UX' }
-];
-
+/**
+ * AboutSection — matches the Vexoo Framer "About" section exactly:
+ *
+ * Layout (column, gap 100px, padding 0 32px):
+ *   ① Title group (column, gap 80px):
+ *      – h1 "About"  →  Open Sauce Two · 160px · weight 500 · tracking -0.04em · lh 1em
+ *      – Bio row    →  spacer (flex:1) + bio text 70% width
+ *                       Open Sauce Sans · 40px · weight 500 · tracking -0.02em · lh 1.3em
+ *   ② Portrait (35% width, right-aligned, border-radius 32px, aspect-ratio 0.797846)
+ */
 export function AboutSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  const orbY = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
-
   return (
-    <section ref={ref} className="relative overflow-hidden py-6 md:py-10">
-      <motion.div
-        aria-hidden
-        style={{ y: orbY }}
-        className="pointer-events-none absolute -right-32 top-1/4 -z-10 h-[55vh] w-[55vh] rounded-full bg-lime-700/10 blur-[140px]"
-      />
+    <section
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 'clamp(48px, 6.94vw, 100px)',
+        width: '100%'
+      }}
+    >
+      {/* ① Title group */}
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'clamp(32px, 5.56vw, 80px)'
+        }}
+      >
+        {/* Heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 60, filter: 'blur(24px)' }}
+          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+        >
+          {/* Framer spec: Open Sauce Two, 160px at 1440px, 130px at 1025px, 100px at 700px */}
+          <h1
+            style={{
+              fontFamily: '"Open Sauce Two", system-ui, sans-serif',
+              fontSize: 'clamp(6.25rem, 11.1vw, 10rem)',
+              fontWeight: 500,
+              letterSpacing: '-0.04em',
+              lineHeight: '1em',
+              color: '#ffffff',
+              margin: 0
+            }}
+          >
+            About
+          </h1>
+        </motion.div>
 
-      <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-14">
-        <div className="md:col-span-5">
-          <PortraitCard />
-        </div>
-
-        <div className="md:col-span-7">
-          <p className="mb-6 text-[11px] uppercase tracking-[0.3em] text-lime-300">
-            Design isn&rsquo;t just about making things look good.
-          </p>
-          <h2 className="font-display text-display-md text-balance text-chalk-50">
-            I&rsquo;m Shreyanshi — a{' '}
-            <em className="italic text-lime-300">UI/UX &amp; Product Designer</em> with five years
-            turning complex ideas into intuitive, visually engaging digital products.
-          </h2>
-
-          <div className="mt-10 grid grid-cols-1 gap-6 text-[15px] leading-relaxed text-chalk-300 sm:grid-cols-2">
-            <p>
-              With a Bachelor&rsquo;s in Fine Arts (Applied Arts), I combine illustration, visual
-              design, and design systems thinking to create seamless experiences across web and
-              mobile.
-            </p>
-            <p>
-              My work spans design systems, data-driven dashboards, mobile-first interfaces, and
-              AI-powered experiences. Design goes beyond visuals — it&rsquo;s about crafting
-              solutions that are inclusive, engaging, and aligned with real business goals.
+        {/* Bio text — right-aligned, 70% width at desktop */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+          style={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            width: '100%'
+          }}
+        >
+          <div
+            style={{
+              /* 70% desktop → 100% on mobile (handled via clamp-like approach) */
+              width: 'min(70%, 100%)'
+            }}
+          >
+            {/* Framer spec: Open Sauce Sans, 40px, weight 500, letter-spacing -0.02em, lh 1.3em */}
+            <p
+              style={{
+                fontFamily: '"Open Sauce Sans", system-ui, sans-serif',
+                fontSize: 'clamp(1.375rem, 2.78vw, 2.5rem)',
+                fontWeight: 500,
+                letterSpacing: '-0.02em',
+                lineHeight: '1.3em',
+                color: '#ffffff',
+                margin: 0
+              }}
+            >
+              I&rsquo;m Shreyanshi &mdash; a UI/UX &amp; Product Designer who
+              believes the best work lives at the intersection of clarity and
+              craft. I specialise in product experiences that feel considered
+              from every angle.
             </p>
           </div>
-
-          <ul className="mt-12 grid grid-cols-2 gap-3 md:grid-cols-4">
-            {pillars.map((p, i) => (
-              <motion.li
-                key={p.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.4 }}
-                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: i * 0.06 }}
-                className="group flex flex-col items-start gap-3 rounded-2xl border border-white/[0.06] bg-white/[0.025] p-4 transition-colors duration-500 hover:bg-white/[0.05]"
-              >
-                <p.icon className="h-5 w-5 text-lime-300 transition-transform duration-500 group-hover:rotate-[8deg]" />
-                <span className="text-[13px] text-chalk-200">{p.label}</span>
-              </motion.li>
-            ))}
-          </ul>
-        </div>
+        </motion.div>
       </div>
-    </section>
-  );
-}
 
-function PortraitCard() {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.4 }}
-      transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-      className="relative aspect-[4/5] w-full overflow-hidden rounded-[28px] border border-white/[0.06] bg-white/[0.025]"
-    >
-      <div
-        aria-hidden
-        className="absolute inset-0"
+      {/* ② Portrait — right-aligned, 35% width, border-radius 32px */}
+      {/* Framer spec: aspect-ratio 0.797846 ≈ 4:5 portrait, width 35% at desktop */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
         style={{
-          background:
-            'radial-gradient(80% 60% at 20% 20%, rgba(204,245,0,0.18), transparent 55%), radial-gradient(80% 60% at 80% 80%, rgba(34,211,238,0.10), transparent 55%), linear-gradient(180deg, #0E0F12, #07080A)'
+          display: 'flex',
+          justifyContent: 'flex-end',
+          width: '100%'
         }}
-      />
-      <div className="grain absolute inset-0 opacity-60" />
-
-      <div className="absolute inset-6 flex flex-col justify-between md:inset-8">
-        <div className="flex items-center justify-between">
-          <p className="text-[11px] uppercase tracking-[0.25em] text-chalk-400">Now</p>
-          <p className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-chalk-300">
-            <span className="h-1.5 w-1.5 rounded-full bg-lime-400 animate-pulse-soft" />
-            Designing Vasitum
-          </p>
+      >
+        <div
+          style={{
+            /* 35% desktop · 50% tablet (≤1025px) · 100% mobile (≤700px) */
+            width: 'clamp(260px, 35%, 516px)',
+            aspectRatio: '0.797846',
+            borderRadius: '32px',
+            overflow: 'hidden',
+            position: 'relative',
+            flexShrink: 0
+          }}
+        >
+          {/* Portrait — swap this <div> for an <Image> when the real photo is ready */}
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              background:
+                'radial-gradient(80% 60% at 20% 20%, rgba(204,245,0,0.22), transparent 55%), radial-gradient(80% 60% at 80% 80%, rgba(34,211,238,0.14), transparent 55%), linear-gradient(180deg, #111314, #07080A)'
+            }}
+          />
+          {/* Subtle noise grain */}
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              backgroundImage:
+                "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+              opacity: 0.06,
+              mixBlendMode: 'overlay'
+            }}
+          />
+          {/* Content inside portrait placeholder */}
+          <div
+            style={{
+              position: 'absolute',
+              inset: '32px',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between'
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center'
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: '"Open Sauce Sans", sans-serif',
+                  fontSize: '11px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.25em',
+                  color: 'rgba(255,255,255,0.4)'
+                }}
+              >
+                Now
+              </span>
+              <span
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  fontFamily: '"Open Sauce Sans", sans-serif',
+                  fontSize: '11px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.25em',
+                  color: 'rgba(255,255,255,0.6)'
+                }}
+              >
+                <span
+                  style={{
+                    display: 'block',
+                    width: '6px',
+                    height: '6px',
+                    borderRadius: '50%',
+                    background: '#ccf500',
+                    animation: 'pulse 2.6s ease-in-out infinite'
+                  }}
+                />
+                Designing
+              </span>
+            </div>
+            <div>
+              <p
+                style={{
+                  fontFamily: '"Open Sauce Two", sans-serif',
+                  fontSize: 'clamp(4.5rem, 6.5vw, 7rem)',
+                  fontWeight: 500,
+                  letterSpacing: '-0.04em',
+                  lineHeight: '0.9em',
+                  color: '#ffffff',
+                  margin: '0 0 12px'
+                }}
+              >
+                S
+              </p>
+              <p
+                style={{
+                  fontFamily: '"Open Sauce Sans", sans-serif',
+                  fontSize: 'clamp(1.25rem, 2vw, 1.75rem)',
+                  fontWeight: 500,
+                  letterSpacing: '-0.02em',
+                  lineHeight: '1.2em',
+                  color: 'rgba(255,255,255,0.9)',
+                  margin: '0 0 8px'
+                }}
+              >
+                Shreyanshi
+              </p>
+              <p
+                style={{
+                  fontFamily: '"Open Sauce Sans", sans-serif',
+                  fontSize: '13px',
+                  color: 'rgba(255,255,255,0.5)',
+                  margin: 0
+                }}
+              >
+                BFA · Applied Arts · Product Designer
+              </p>
+            </div>
+          </div>
         </div>
-
-        <div className="space-y-3">
-          <p className="font-display text-7xl italic leading-[0.9] text-chalk-50 md:text-8xl">
-            S
-          </p>
-          <p className="font-display text-4xl italic text-chalk-100">Shreyanshi</p>
-          <p className="text-[13px] text-chalk-300">
-            BFA · Applied Arts. Five years across AI, SaaS, Web3 and brand systems.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-3 gap-3 border-t border-white/[0.06] pt-5 text-[11px] uppercase tracking-[0.2em] text-chalk-400">
-          <Cell title="Years" value="5+" />
-          <Cell title="Systems" value="3" />
-          <Cell title="0 → 1" value="AI" />
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
-function Cell({ title, value }: { title: string; value: string }) {
-  return (
-    <div>
-      <p className="text-base normal-case tracking-normal text-chalk-100">{value}</p>
-      <p className="mt-1">{title}</p>
-    </div>
+      </motion.div>
+    </section>
   );
 }

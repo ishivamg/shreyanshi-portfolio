@@ -5,6 +5,7 @@ export type Project = {
   client: string;
   year: string;
   domain: string;
+  category: string;       // short card label, e.g. "UI/UX Design"
   summary: string;
   highlights: string[];
   outcomes: { label: string; value: string }[];
@@ -20,6 +21,7 @@ export const projects: Project[] = [
     client: 'Maven Workforce',
     year: '2024 — Now',
     domain: 'AI · SaaS · Recruitment',
+    category: 'UI/UX Design',
     summary:
       'End-to-end redesign of an AI-powered recruitment platform — recruiter dashboards, candidate screening, automated scheduling, and a conversational AI layer that orchestrates the pipeline.',
     highlights: [
@@ -44,6 +46,7 @@ export const projects: Project[] = [
     client: 'Maven Workforce',
     year: '2024',
     domain: 'Branding · UI/UX · Web',
+    category: 'Brand + UI/UX',
     summary:
       'Crafted the branding, UI/UX and responsive experience for Maven Workforce — a global recruitment platform with a modern, cohesive identity across devices.',
     highlights: [
@@ -66,6 +69,7 @@ export const projects: Project[] = [
     client: 'Concept · Personal',
     year: '2023',
     domain: 'Mobile · Safety · 0 → 1',
+    category: 'Mobile Design',
     summary:
       'A life-saving application that connects people during accidents — fast communication, calm UI, and a direct line to family and emergency contacts at the worst possible moment.',
     highlights: [
@@ -113,26 +117,65 @@ export const experience = [
   {
     company: 'Maven Workforce Inc.',
     role: 'UI/UX Designer',
-    period: 'Oct 2024 — Present',
-    note: 'Lead UI/UX design at Vasitum, combining creativity, strategy, and collaboration to craft intuitive, user-centred experiences. Mentor interns and work closely with marketing to enhance brand engagement through thoughtful design.'
+    period: '2024 – Present',
+    note: 'Lead UI/UX design at Vasitum — crafting intuitive, user-centred experiences across the full AI-recruitment product. Mentor interns, collaborate with marketing, and drive design systems from zero.'
   },
   {
     company: 'House of UGC',
     role: 'UI/UX & Graphic Designer',
-    period: 'Jul 2023 — Oct 2024',
-    note: 'Designed wireframes, prototypes, and user flows to communicate ideas and ensure seamless user journeys. Built style guides and design systems for consistency across platforms. Improved web performance by optimizing visuals.'
+    period: '2023 – 2024',
+    note: 'Designed wireframes, prototypes, and user flows for seamless user journeys. Built style guides and design systems for cross-platform consistency. Improved web performance by optimizing visuals.'
   },
   {
     company: 'Metaspace',
     role: 'UI/UX & Graphic Designer',
-    period: 'Jan 2022 — Jun 2023',
-    note: 'Created wireframes, prototypes, and user flows to support smooth in-game navigation. Built design systems and style guidelines for cross-platform consistency. Designed HUDs, menus, and social-media posts to engage players.'
+    period: '2022 – 2023',
+    note: 'Created wireframes, prototypes, and user flows to support smooth in-game navigation. Built design systems and style guidelines for cross-platform consistency. Designed HUDs, menus, and social-media assets.'
   },
   {
     company: 'Brijbasi Art Press',
     role: 'Graphic Designer',
-    period: 'Jan 2021 — Jan 2022',
-    note: 'Created digital illustrations and vector graphics for print and online media. Developed artwork that aligned with brand aesthetics and enhanced visual storytelling. Delivered high-quality assets under tight deadlines.'
+    period: '2021 – 2022',
+    note: 'Created digital illustrations and vector graphics for print and online media. Developed artwork aligned with brand aesthetics and enhanced visual storytelling under tight deadlines.'
+  }
+];
+
+export type Testimonial = {
+  quote: string;
+  name: string;
+  company: string;
+};
+
+export const testimonials: Testimonial[] = [
+  {
+    quote: 'Shreyanshi has this rare ability to hold the big picture and the smallest detail at the same time. She pushes every project to a level you didn\'t know was possible — and makes the process feel effortless.',
+    name: 'Rajeev Sharma',
+    company: 'Maven Workforce'
+  },
+  {
+    quote: 'Working with Shreyanshi changed how I think about creative direction. She doesn\'t just design — she asks the right questions until the work means something. That clarity is hard to find.',
+    name: 'Priya Nair',
+    company: 'House of UGC'
+  },
+  {
+    quote: 'Shreyanshi is one of those creatives who makes everyone around her better. Her taste is impeccable, her feedback is generous, and her commitment to the work never wavers no matter the scale.',
+    name: 'Arjun Mehta',
+    company: 'Metaspace'
+  },
+  {
+    quote: 'I\'ve worked with a lot of designers, but Shreyanshi stands apart. She brings both strong vision and genuine openness to collaboration — a combination that\'s almost impossible to come by.',
+    name: 'Sneha Kapoor',
+    company: 'Vasitum'
+  },
+  {
+    quote: 'Shreyanshi brings a kind of quiet confidence to every brief — she listens first, then shapes the direction in a way that feels inevitable. You walk away wondering why you didn\'t see it sooner.',
+    name: 'Vikram Iyer',
+    company: 'Brijbasi Art Press'
+  },
+  {
+    quote: 'Every project with Shreyanshi felt like a collaboration with someone who truly cared — about the craft, the users, and the outcome. That kind of dedication is rare and impossible to fake.',
+    name: 'Ankita Joshi',
+    company: 'Design Community'
   }
 ];
 

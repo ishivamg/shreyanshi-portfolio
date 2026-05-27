@@ -49,10 +49,12 @@ export function PageShell({ eyebrow, title, intro, prev, next, children }: Props
             </span>
           </motion.div>
 
+          {/* Framer spec: Open Sauce Two / weight 500 / letter-spacing -0.04em / line-height 1em */}
           <RevealText
             as="h1"
             text={title}
-            className="font-display text-[clamp(3.25rem,10vw,9rem)] leading-[0.92] tracking-tightest text-chalk-50"
+            className="font-display text-[clamp(3.25rem,10vw,9rem)] leading-[1em] text-chalk-50"
+            style={{ fontWeight: 500, letterSpacing: '-0.04em' }}
             stagger={0.04}
           />
 
