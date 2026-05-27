@@ -1,10 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-
-  basePath: '/shreyanshi-portfolio',
-  assetPrefix: '/shreyanshi-portfolio/',
-
   reactStrictMode: true,
 
   images: {
